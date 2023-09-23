@@ -1,0 +1,23 @@
+<%- include("./partials/header") %>
+
+    <nav class="navbar navbar-light bg-light">
+        <form class="container-fluid">
+            <a class="navbar-brand" href="/">Todo</a>
+        </form>
+    </nav>
+
+    <form action="/add/todo" method="post" class="d-flex my-5">
+        <input class="form-control me-2" type="text" name="todo" placeholder="Todo">
+        <input class="btn btn-lg btn-outline-success" type="submit" value="Add Todo"></input>
+    </form>
+
+
+    <ul class="list-group my-5">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+    </ul>
+
+    <%- include("./partials/footer") %>
