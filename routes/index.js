@@ -5,8 +5,9 @@ const app = express();
 app.use(express.json())
 
 
-router.get("/", (req, res) => {
-    res.render("index")
+router.get("/", async (req, res) => {
+    const allTodo = await TodoModel.find()
+    res.render("index", { todo: allTodo })
 })
 
 router.post("/add/todo", async (req, res) => {
@@ -17,6 +18,18 @@ router.post("/add/todo", async (req, res) => {
 
         await newTodo.save();
         console.log("Successfully added todo!");
+        res.redirect("/");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+router.get("/delete/todo/:_id", async (req, res) => {
+    try {
+        const { _id } = req.params
+        await TodoModel.deleteOne({ _id })
+        console.log("Successfully deleted todo!")
         res.redirect("/");
     } catch (err) {
         console.error(err);

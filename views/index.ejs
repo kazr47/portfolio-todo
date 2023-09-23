@@ -13,11 +13,10 @@
 
 
     <ul class="list-group my-5">
-        <li class="list-group-item">An item</li>
-        <li class="list-group-item">A second item</li>
-        <li class="list-group-item">A third item</li>
-        <li class="list-group-item">A fourth item</li>
-        <li class="list-group-item">And a fifth one</li>
+        <% todo.forEach(todos => { %>
+            <li class="list-group-item"><%= todos.todo %><a href="/delete/todo/<%= todos._id %>" class="btn btn-danger btn-small">Delete</a></li>
+            
+        <%  }); %>
     </ul>
 
     <%- include("./partials/footer") %>
