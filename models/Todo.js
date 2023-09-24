@@ -1,15 +1,16 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const TodoSchema = new mongoose.Schema({
     todo: {
         type: String,
         required: true,
     },
-
     userId: {
-        type: String
-    }
-})
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+}, {timestamps: true});
 
 const UserSchema = new mongoose.Schema({
     username: {
