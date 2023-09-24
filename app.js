@@ -1,9 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import env from "dotenv";
+import "dotenv/config"
 import router from "./routes/index.js";
-
-env.config();
 
 const app = express();
 const port = process.env.PORT || 3001; // Get the port number from environment variables or use the default (3001)

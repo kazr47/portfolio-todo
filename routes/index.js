@@ -2,11 +2,18 @@ import express from "express";
 import bcrypt from "bcrypt"
 import { TodoModel, UserModel } from "../models/Todo.js";
 import jwt from "jsonwebtoken"
-// import { JsonWebTokenError } from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 
 const router = express.Router();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
+
+
+// JWTのシークレットキーを設定
+const secretKey = 'your-secret-key';
+
+
 
 // Endpoint to display the login page
 
@@ -67,15 +74,17 @@ router.post('/login', async (req, res) => {
             return res.status(401).send('Invalid username or password');
         }
 
+        // ログイン成功時にJWTトークンを生成
+        const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' }); // トークンの有効期限を設定 (1時間)
 
-        // // ログイン成功時に JWT を生成
-        // const jwtSecret = 'your-secret-key'; // 秘密鍵を設定
-        // const userId = user._id; // ユーザーIDを取得
-        // const token = jwt.sign({ userId }, jwtSecret, { expiresIn: '10m' }); // トークンを生成
+        // JWTトークンをCookieに設定
+        res.cookie('jwtToken', token, { maxAge: 3600000, httpOnly: true }); // 1時間の有効期限を設定
 
-        
-        // "/todo" にユーザーIDをパラメータとしてリダイレクト
-        res.redirect(`/todo/${user._id}`);
+        // console.log(token);
+
+
+        // "/todo" にリダイレクト
+        res.redirect(`/todo`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -84,7 +93,7 @@ router.post('/login', async (req, res) => {
 
 
 // Endpoint to fetch and display all Todos
-router.get("/todo/:userId", async (req, res) => {
+router.get("/todo", async (req, res) => {
     try {
         const userId = req.params.userId;
 
@@ -112,7 +121,7 @@ router.post("/add/todo", async (req, res) => {
         await newTodo.save();
 
         console.log("Successfully added todo!");
-        res.redirect(`/todo/${userId}`);
+        res.redirect(`/todo`);
     } catch (err) {
         console.error("Error while adding todo:", err);
         res.status(500).send("Internal Server Error");
@@ -122,13 +131,13 @@ router.post("/add/todo", async (req, res) => {
 // Endpoint to delete a Todo
 router.get("/delete/todo/:_id", async (req, res) => {
     try {
-        const { userId, _id } = req.params;
+        const { _id } = req.params;
 
         // ユーザーIDとTodoのIDを指定してTodoを削除
-        await TodoModel.deleteOne({ _id, userId });
+        await TodoModel.deleteOne({ _id });
 
         console.log("Successfully deleted todo!");
-        res.redirect(`/todo/${userId}`);
+        res.redirect(`/todo`);
     } catch (err) {
         console.error("Error while deleting todo:", err);
         res.status(500).send("Internal Server Error");
