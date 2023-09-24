@@ -1,34 +1,32 @@
-import express from "express"
+import express from "express";
 import mongoose from "mongoose";
-import env from "dotenv"
-import router from "./routes/index.js"
-
+import env from "dotenv";
+import router from "./routes/index.js";
 
 env.config();
+
 const app = express();
-const port = process.env.port || 3001
+const port = process.env.PORT || 3001; // Get the port number from environment variables or use the default (3001)
 
 
-// conect to mongodb
+// Connect to MongoDB
 mongoose
     .connect(process.env.MONGODB_URL,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(()=> console.log("Connected to MongoDB!"))
-    .catch((err) => console.log(err))
+    .then(() => console.log("Connected to MongoDB!"))
+    .catch((err) => console.error("Error while connecting to MongoDB:", err));
     
-// middlewares
-app.use(express.urlencoded({extended: true}))
-app.use(express.static("public"))
-app.set("view engine", "ejs")
+// Middleware configuration
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded data
+app.use(express.static("public")); // Serve static files from the "public" directory
+app.set("view engine", "ejs"); // Set EJS as the view engine
 
-// routes
+// Routes
 app.use(router);
 
-
-
+// Start the server
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-
+  console.log(`Example app listening at http://localhost:${port}`);
 });
