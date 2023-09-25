@@ -1,59 +1,52 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import { TodoModel, UserModel } from "../models/Todo.js";
-
+import { TodoModel } from "../models/Todo.js";
+import errorHandler from "../middlewares/errorHandler.js";
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// Endpoint to fetch and display all Todos
-// Need authenticateToken
+
+// ユーザーに関連するTodoを取得し表示するエンドポイント（authenticateTokenが必要）
 const showTodo = async (req, res) => {
     try {
-        // const allTodo = await TodoModel.find()
-        const userTodo = await TodoModel.find({ userId: req.user.userId })
-        res.render("todo", { todo: userTodo })
-    } catch (err) {
-        console.error("Error while fetching user's todos:", err);
-        res.status(500).send("Internal Server Error");
+        const userTodo = await TodoModel.find({ userId: req.user.userId });
+        res.render("todo", { todo: userTodo });
+    } catch (error) {
+        errorHandler(error, req, res);
     }
 };
 
-
-// Endpoint to add a new Todo
-// Need authenticateToken
+// 新しいTodoを追加するエンドポイント（authenticateTokenが必要）
 const addTodo = async (req, res) => {
     try {
-        const todo = req.body.todo;
-        const user = req.user.userId;
+        const { todo } = req.body;
+        const userId = req.user.userId;
+
         if (!todo) {
             return;
-            // todo フィールドが空でないことを確認
         }
-        console.log(todo)
-        const newTodo = new TodoModel({ todo: todo, userId: user });
 
+        const newTodo = new TodoModel({ todo, userId });
         await newTodo.save();
+
         console.log("Successfully added todo!");
         res.redirect("/todo");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Internal Server Error");
+    } catch (error) {
+        errorHandler(error, req, res);
     }
 };
 
-// Endpoint to delete a Todo
-
+// Todoを削除するエンドポイント
 const deleteTodo = async (req, res) => {
     try {
-        const { _id } = req.params
-        await TodoModel.deleteOne({ _id })
-        console.log("Successfully deleted todo!")
+        const { _id } = req.params;
+        await TodoModel.deleteOne({ _id });
+        console.log("Successfully deleted todo!");
         res.redirect("/todo");
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Internal Server Error");
+    } catch (error) {
+        errorHandler(error, req, res);
     }
 };
 
