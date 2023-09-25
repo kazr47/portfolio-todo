@@ -13,7 +13,7 @@ const showTodo = async (req, res) => {
     try {
         // const allTodo = await TodoModel.find()
         const userTodo = await TodoModel.find({ userId: req.user.userId })
-        res.render("index", { todo: userTodo })
+        res.render("todo", { todo: userTodo })
     } catch (err) {
         console.error("Error while fetching user's todos:", err);
         res.status(500).send("Internal Server Error");

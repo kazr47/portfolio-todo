@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/stylesheet/todo.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="/">Todo</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <form action="/add/todo" method="post">
+                <h3>Add Todo</h3>
+
+                <label for="todo">Todo</label>
+                <input type="text" placeholder="Todo" name="todo" id="todo">
+
+                <button type="submit">Add Todo</button>
+            </form>
+        </div>
+
+        <ul class="list-group">
+            <% todo.forEach(todos=> { %>
+                <li class="list-group-item">
+                    <%= todos.todo %>
+                        <a href="/delete/todo/<%= todos._id %>" class="delete-btn">Delete</a>
+                </li>
+                <% }); %>
+        </ul>
+
+        <a href="/logout" class="btn-logout">Logout</a>
+    </div>
+
+</body>
+
+</html>
