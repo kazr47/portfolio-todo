@@ -11,7 +11,7 @@ import {redirectIfAuthenticated, userRegistration, userLogin, userLogout, userIs
 import authenticateToken from "../middlewares/authentication.js"
 
 router.get("/", redirectIfAuthenticated)
-router.post("/redister", userRegistration)
+router.post("/register", userRegistration)
 router.post("/login", userLogin)
 router.get("/logout", userLogout)
 router.get("/isLoggedIn", userIsLoggedIn)
