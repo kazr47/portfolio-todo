@@ -2,18 +2,38 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f0f0f0;
+    background: url("../img/img.jpg");
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     margin-bottom: 0;
+    color: #fff; /* テキストの色を白に設定 */
+}
+
+/* ボタンにネオン風のエフェクトを追加 */
+.neon-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* ボタンにネオン風の光彩を追加 */
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.neon-button:hover {
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); /* ホバー時に光彩を増やす */
 }
 
 /* ヘッダー */
 .header {
-    background-color: #f8f9fa;
+    background: transparent; 
     width: 100%;
+    background: transparent;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -25,7 +45,7 @@ body {
 .navbar-brand {
     font-weight: bold;
     text-decoration: none;
-    color: #333;
+    color: white;
 }
 
 /* コンテナ */
@@ -33,7 +53,9 @@ body {
     max-width: 400px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #ffffff;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
@@ -41,38 +63,29 @@ body {
 /* フォーム */
 .form-container h3 {
     margin-bottom: 20px;
-    color: #333;
+    color: white;
 }
 
 .form-container label {
     display: block;
     text-align: left;
     margin-bottom: 5px;
-    color: #333;
+    color: white;
 }
 
-.form-container input[type="text"],
-.form-container input[type="password"] {
-    width: 100%;
+.form-container input{
+    width: 90%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.form-container button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background: transparent;
 }
 
 /* リストグループ */
 .list-group {
     margin-top: 20px;
+    padding: 0;
 }
 
 .list-group-item {
@@ -81,7 +94,8 @@ body {
     align-items: center;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #ffffff;
+    background: transparent;
+    color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -90,11 +104,12 @@ body {
 .delete-btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
-    background-color: #dc3545;
+    background-color: #dc35468f;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none; 
 }
 
 /* ログアウトボタン */

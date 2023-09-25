@@ -26,7 +26,7 @@
                 <label for="todo">Todo</label>
                 <input type="text" placeholder="Todo" name="todo" id="todo">
 
-                <button type="submit">Add Todo</button>
+                <button type="submit" class="neon-button">Add Todo</button>
             </form>
         </div>
 
@@ -34,12 +34,12 @@
             <% todo.forEach(todos=> { %>
                 <li class="list-group-item">
                     <%= todos.todo %>
-                        <a href="/delete/todo/<%= todos._id %>" class="delete-btn">Delete</a>
+                    <a href="/delete/todo/<%= todos._id %>" class="delete-btn neon-button">Delete</a>
                 </li>
-                <% }); %>
+            <% }); %>
         </ul>
 
-        <a href="/logout" class="btn-logout">Logout</a>
+        <a href="/logout" class="btn-logout neon-button">Logout</a>
     </div>
 
 </body>
