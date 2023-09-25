@@ -46,7 +46,7 @@ const userRegistration = async (req, res) => {
         });
 
         await newUser.save();
-        res.status(201).send('User registered successfully');
+        res.send('<div><h1>User registered successfully</h1><a href="/">Back</a></div>');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
