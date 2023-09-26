@@ -2,34 +2,50 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: url("../img/img.jpg");
+    background: linear-gradient(to bottom, #2c3e50, #8e44ad);
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    color: #fff;
     margin-bottom: 0;
-    color: #fff; /* テキストの色を白に設定 */
 }
 
-/* ボタンにネオン風のエフェクトを追加 */
-.neon-button {
-    padding: 10px 20px;
-    background-color: #28a745;
+::placeholder {
     color: #fff;
+}
+
+/* ボタンスタイル */
+.neon-button, .delete-neon-button {
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* ボタンにネオン風の光彩を追加 */
+    box-shadow: 0 0 10px rgba(189, 189, 189, 0.2); 
     transition: box-shadow 0.3s ease-in-out;
+    text-decoration: none; /* リンクの下線を削除 */
+}
+
+.neon-button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.delete-neon-button {
+    background-color: #a72828;
+    color: #fff;
 }
 
 .neon-button:hover {
     box-shadow: 0 0 20px rgba(40, 167, 69, 0.8); /* ホバー時に光彩を増やす */
 }
 
+.delete-neon-button:hover {
+    box-shadow: 0 0 20px rgba(167, 40, 40, 0.8);
+}
+
 /* ヘッダー */
 .header {
-    background: transparent; 
     width: 100%;
     background: transparent;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
@@ -61,6 +77,10 @@ body {
 }
 
 /* フォーム */
+.form-container {
+    height: 180px;
+    border-bottom: 1px solid #ccc;
+}
 .form-container h3 {
     margin-bottom: 20px;
     color: white;
@@ -80,6 +100,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     background: transparent;
+    color: #fff;
 }
 
 /* リストグループ */
@@ -109,7 +130,6 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    text-decoration: none; 
 }
 
 /* ログアウトボタン */

@@ -32,7 +32,7 @@ const userRegistration = async (req, res) => {
         const existingUser = await UserModel.findOne({ username });
 
         if (existingUser) {
-            return res.status(400).send('Username already in use😭');
+            return res.send('<div><h1>Username already in use😭</h1><a href="/">Back</a></div>');
         }
 
         const saltRounds = 10;
@@ -58,13 +58,13 @@ const userLogin = async (req, res) => {
         const user = await UserModel.findOne({ username });
 
         if (!user) {
-            return res.status(401).send('Invalid username or password');
+            return res.send('<div><h1>Invalid username or password</h1><a href="/">Back</a></div>');
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
-            return res.status(401).send('Invalid username or password');
+            return res.send('<div><h1>Invalid username or password</h1><a href="/">Back</a></div>');
         }
 
         const payload = {
