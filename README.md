@@ -4,7 +4,6 @@
 - **Frontend**
   - EJS
   - CSS
-  - JavaScript
 
 - **Backend**
   - Node.js
